@@ -13,6 +13,7 @@
         <module>db</module>
         <module>jwt</module>
         <module>redis</module>
+        <module>http</module>
     </modules>
 
     <parent>
