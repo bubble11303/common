@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author bubble
- * @date 2024/7/15
+ * @since 2024/7/15
  */
 public interface MyStreamUtil {
 

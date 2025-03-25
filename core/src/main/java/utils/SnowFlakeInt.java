@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 /**
  * @author bubble
- * @date 2024/7/16
+ * @since 2024/7/16
  */
 public class SnowFlakeInt {
 

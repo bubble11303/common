@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author bubble
- * @date 2024/7/16
+ * @since 2024/7/16
  */
 public class MinuteCounter {
     private static final int MASK = 0x7FFFFFFF;

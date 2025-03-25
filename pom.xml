@@ -6,7 +6,7 @@
 
     <groupId>com.susu.parent</groupId>
     <artifactId>common</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
@@ -121,5 +121,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- 配置阿里云私库的发布地址 -->
+    <distributionManagement>
+        <!-- 正式版本（RELEASE）仓库 -->
+        <repository>
+            <!-- 与 settings.xml 中的 server.id 一致 -->
+            <id>dontspeakyet</id>
+            <url>https://packages.aliyun.com/6757cd6e7fefc7ded4ee0563/maven/dontspeakyet</url>
+        </repository>
+        <!-- 快照版本（SNAPSHOT）仓库 -->
+        <snapshotRepository>
+            <id>dontspeakyet</id>
+            <url>https://packages.aliyun.com/6757cd6e7fefc7ded4ee0563/maven/dontspeakyet</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

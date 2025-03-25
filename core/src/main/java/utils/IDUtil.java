@@ -3,8 +3,8 @@ package utils;
 import java.util.UUID;
 
 /**
- * @Author: 热心村民王富贵
- * @Date: 2025/03/13
+ * @author: 你先别说话
+ * @since: 2025/03/13
  * @Description:
  */
 public class IDUtil {
