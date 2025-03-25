@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"}[%X{trace-id}][%p][%c][%M:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/info-%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <maxHistory>50</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"}[%X{trace-id}][INFO][%t][%c][%M:%L] - %m%n</pattern>
+        </encoder>
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+    </appender>
+
+    <appender name="WARN_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/warn-%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"}[%X{trace-id}][WARN][%t][%c][%M:%L] - %m%n</pattern>
+        </encoder>
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>WARN</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+    </appender>
+
+    <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error-%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"}[%X{trace-id}][ERROR][%t][%c][%M:%L] - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--  操作日志   -->
+    <appender name="SyslogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/sys.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/sys-%d{yyyyMMdd}.log.gz</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"}[%X{trace-id}][INFO][%t][%c][%M:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--若是additivity设为false，则子Logger只会在自己的appender里输出，不会在root的logger的appender里输出-->
+    <!--若是additivity设为true，则子Logger不止会在自己的appender里输出，还会在root的logger的appender里输出-->
+    <logger name="SysLogAspect" level="info" additivity="false">
+        <appender-ref ref="SyslogAppender"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="INFO_LOG" />
+        <appender-ref ref="WARN_LOG" />
+        <appender-ref ref="ERROR_LOG" />
+    </root>
+</configuration>
